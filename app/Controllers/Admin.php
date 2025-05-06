@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 
-class Dashboard extends BaseController
+class Admin extends BaseController
 {
     public function index()
     {
@@ -15,15 +15,16 @@ class Dashboard extends BaseController
 
         $userModel = new UserModel();
         $userData = $userModel->where('Username', $username)->first();
+        $employee = $userModel->findAll(); // Ambil semua data employee
 
         if (!$userData){
             return redirect()->to('/login')->with('error', 'User not found');
         }
 
-        $data = [
-            'user' => $userData
-        ];
-
-        return view('Dashboard', $data);
+        if ($userData['Position'] !== 'Admin') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }else{
+            return view('Admin', ['employee' => $employee, 'userData' => $userData]);
+        }
     }
 }

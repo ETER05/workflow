@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 
-class Dashboard extends BaseController
+class Department extends BaseController
 {
     public function index()
     {
@@ -24,6 +24,6 @@ class Dashboard extends BaseController
             'user' => $userData
         ];
 
-        return view('Dashboard', $data);
+        return view('Departement', $data);
     }
 }

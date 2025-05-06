@@ -20,13 +20,16 @@
 </head>
 <body>
 
-    <h2>Welcome, <?= esc($username) ?>!</h2>
+    <h2>Welcome, <?= esc($user['Username']) ?>!</h2>
 
     <a href="/profile" class="btn">Profile</a>
     <a href="/attendance" class="btn">Attendance</a>
     <a href="/project" class="btn">Project</a>
     <a href="/finance" class="btn">Finance</a>
+    <?php if ($user['Position'] == 'Admin'): ?>
+        <a href="/admin" class="btn">Admin</a>
+    <?php endif; ?>
     <a href="/logout" class="btn">Logout</a>
-
+    
 </body>
 </html>
