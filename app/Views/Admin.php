@@ -22,9 +22,11 @@
 
     <h2><?= esc($userData['Username'])?></h2>
 
-    <a href="/departement" class="btn">Departement</a>
-    <a href="/addemployee" class="btn">Add Employee</a>
+    <a href="/department" class="btn">Department</a>
+    <a href="/overtime/approval" class="btn">Overtime Request</a>
+    <a href="/employee" class="btn">Add Employee</a>
     <a href="/addproject" class="btn">Add Project</a>
+    <a href="/client" class="btn">Client</a>
     <br><br>
 
     <table border="1">

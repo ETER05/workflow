@@ -146,7 +146,7 @@ class Employee extends BaseController
 
                 return redirect()->to('/admin')->with('success', 'Edit employee successfully!');
             } else {
-                return redirect()->to('/employeee/edit')->with('error', $validation->getErrors());
+                return redirect()->to('/employee/edit')->with('error', $validation->getErrors());
             }
         }
     }
