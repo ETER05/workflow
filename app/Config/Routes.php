@@ -50,7 +50,14 @@ $routes->get('/overtime/delete/(:segment)', 'Overtime::delete/$1');
 $routes->get('/overtime/approval', 'Overtime::approval');
 $routes->get('/overtime/approve/(:segment)', 'Overtime::approve/$1');
 $routes->get('/overtime/reject/(:segment)', 'Overtime::reject/$1');
+//leave
+$routes->get('/leave', 'Leave::index');
+$routes->get('/leave/add', 'Leave::add');
+$routes->post('/leave/addprocess', 'Leave::addprocess');
+$routes->get('/leave/delete/(:segment)', 'Leave::delete/$1');
+$routes->get('/leave/approval', 'Leave::approval');
+$routes->get('/leave/approve/(:segment)', 'Leave::approve/$1');
+$routes->get('/leave/reject/(:segment)', 'Leave::reject/$1');
 //working on it
 $routes->get('/project', 'Project::index');
 $routes->get('/finance', 'Finance::index');
-$routes->get('/leave', 'Leave::index');

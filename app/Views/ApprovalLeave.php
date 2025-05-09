@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Leave Request</title>
+    <title>Overtime</title>
     <style>
         .btn {
             padding: 10px 20px;
@@ -20,29 +20,32 @@
 </head>
 <body>
 
-    <h2>Request, <?= session('username') ?>!</h2>
+    <h2>Overtime, <?= session('username') ?>!</h2>
 
-    <a href="/leave/add" class="btn">Request Leave</a>
+    <a href="/overtime/approval" class="btn">Add Overtime</a>
     <br><br>
 
     <table border="1">
         <tr>
+            <th>Employee Name</th>
             <th>Leave Type</th>
             <th>Leave Start</th>
             <th>Leave End</th>
             <th>Status</th>
             <th>Reason</th>
+            <th>Approve</th>
+            <th>Reject</th>
         </tr>
         <?php foreach ($leave as $row): ?>
         <tr>
+            <td><?= esc($row['Username']) ?></td>
             <td><?= esc($row['Leave_Type']) ?></td>
             <td><?= esc($row['Leave_Start']) ?></td>
             <td><?= esc($row['Leave_End']) ?></td>
             <td><?= esc($row['Status']) ?></td>
             <td><?= esc($row['Reason']) ?></td>
-            <?php if ($row['Status'] === 'Rejected'): ?>
-                <td><a href="/leave/delete/<?= esc($row['Leave_ID']) ?>">Pull</a></td>
-            <?php endif; ?>
+            <td><a href="/leave/approve/<?= esc($row['Leave_ID']) ?>">Approve</a></td>
+            <td><a href="/leave/reject/<?= esc($row['Leave_ID']) ?>">Reject</a></td>
         </tr>
         <?php endforeach; ?>
     </table>
