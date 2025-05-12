@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow Dashboard</title>
+    <title>ICEHRM Dashboard</title>
     <style>
         body {
             margin: 0;
@@ -199,18 +199,16 @@
     <div class="header">
         <div class="logo">
             <img src="Logo Putih.png" alt="ICEHRM">
-            <span>Employee Management System</span>
+            <span>Sistem Informasi Pegawai</span>
         </div>
         <div class="menu" onclick="toggleMenu()">☰
             <div class="dropdown" id="menuDropdown">
-                <a href="/profile">Profile</a>
-                <a href="/attendance">Attendance</a>
-                <a href="/project">Project</a>
-                <a href="/finance">Finance</a>
-                <?php if(session('position') == 'Admin'):?>
-                  <a href="/admin">Admin</a>
-                <?php endif;?>
-                <a href="/logout">Logout</a>
+                <a href="#profil">Profil</a>
+                <a href="#kehadiran">Kehadiran</a>
+                <a href="#proyek">Proyek</a>
+                <a href="#keuangan">Keuangan</a>
+                <a href="#admin">Admin</a>
+                <a href="#keluar">Keluar</a>
             </div>
         </div>
     </div>
@@ -221,36 +219,34 @@
 </div>
 
     <div class="container">
-        <div class="card" onclick="window.location.href='/profile'">
-            <img src="<?= base_url('Profile.png') ?>" alt="Profil">
-            <span>Profile</span>
+        <div class="card" onclick="window.location.href='#profil'">
+            <img src="Profile.png" alt="Profil">
+            <span>Profil</span>
         </div>
-        <div class="card" onclick="window.location.href='/attendance'">
-            <img src="<?= base_url('Absen.png') ?>" alt="Kehadiran">
-            <span>Attendance</span>
+        <div class="card" onclick="window.location.href='#kehadiran'">
+            <img src="Absen.png" alt="Kehadiran">
+            <span>Kehadiran</span>
         </div>
-        <div class="card" onclick="window.location.href='/project'">
-            <img src="<?= base_url('Project.png') ?>" alt="Proyek">
-            <span>Project</span>
+        <div class="card" onclick="window.location.href='#proyek'">
+            <img src="Ikon Project.png" alt="Proyek">
+            <span>Proyek</span>
         </div>
-        <div class="card" onclick="window.location.href='/finance'">
-            <img src="<?= base_url('finance.png') ?>" alt="Keuangan">
-            <span>Finance</span>
+        <div class="card" onclick="window.location.href='#keuangan'">
+            <img src="finance.png" alt="Keuangan">
+            <span>Keuangan</span>
         </div>
-        <div class="card" onclick="window.location.href='/department'">
-        <img src="<?= base_url('department ikon.png') ?>" alt="Department">
+        <div class="card" onclick="window.location.href='#department'">
+            <img src="department ikon.png" alt="Department">
             <span>Department</span>
         </div>
-        <div class="card" onclick="window.location.href='/client'">
-            <img src="<?= base_url('client ikon.png') ?>" alt="Client">
+        <div class="card" onclick="window.location.href='#client'">
+            <img src="client ikon.png" alt="Client">
             <span>Client</span>
         </div>
-        <?php if (session('position') == 'Admin'): ?>
-          <div class="card" onclick="window.location.href='/admin'">
-              <img src="<?= base_url('admin ikon.png') ?>" alt="Admin">
-              <span>Admin</span>
-          </div>
-        <?php endif; ?>
+        <div class="card" onclick="window.location.href='#admin'">
+            <img src="admin ikon.png" alt="Admin">
+            <span>Admin</span>
+        </div>
     </div>
 
     <script>
@@ -269,7 +265,7 @@
 
     <footer class="footer">
     <div class="footer-content">
-        <p>&copy; 2025 Employee Management System - Workflow</p>
+        <p>&copy; 2025 Sistem Informasi Pegawai - Workflow</p>
         <p>Developed by Tim IT Workflow</p>
     </div>
 </footer>

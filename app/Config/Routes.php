@@ -58,6 +58,18 @@ $routes->get('/leave/delete/(:segment)', 'Leave::delete/$1');
 $routes->get('/leave/approval', 'Leave::approval');
 $routes->get('/leave/approve/(:segment)', 'Leave::approve/$1');
 $routes->get('/leave/reject/(:segment)', 'Leave::reject/$1');
-//working on it
+//project
 $routes->get('/project', 'Project::index');
+$routes->get('/project/add', 'Project::add');
+$routes->post('/project/addprocess', 'Project::addprocess');
+$routes->get('/project/edit/(:segment)', 'Project::edit/$1');
+$routes->post('/project/editprocess/(:segment)', 'Project::editprocess/$1');
+$routes->get('/project/delete/(:segment)', 'Project::delete/$1');
+$routes->get('/project/view/(:segment)', 'Project::view/$1');
+$routes->post('/project/upload/(:num)', 'Project::upload/$1');
+$routes->get('/project/download/(:num)/(:any)', 'Project::download/$1/$2');
+$routes->get('/project/deletefile/(:num)/(:num)', 'Project::deletefile/$1/$2');
+
+//working on it
+
 $routes->get('/finance', 'Finance::index');

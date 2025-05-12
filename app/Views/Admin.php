@@ -26,7 +26,7 @@
     <a href="/overtime/approval" class="btn">Overtime Request</a>
     <a href="/leave/approval" class="btn">Leave Request</a>
     <a href="/employee" class="btn">Add Employee</a>
-    <a href="/addproject" class="btn">Add Project</a>
+    <a href="/project" class="btn">Add Project</a>
     <a href="/client" class="btn">Client</a>
     <br><br>
 
