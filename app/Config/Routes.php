@@ -24,6 +24,7 @@ $routes->post('/attendance/checkin', 'Attendance::checkin');
 $routes->post('/attendance/checkout', 'Attendance::checkout');
 //employee
 $routes->get('/employee', 'Employee::add');
+$routes->get('/employee/add', 'Employee::add');
 $routes->post('/employee/addprocess', 'Employee::addprocess');
 $routes->get('/employee/edit/(:segment)', 'Employee::edit/$1');
 $routes->post('/employee/editprocess/(:segment)', 'Employee::editprocess/$1');

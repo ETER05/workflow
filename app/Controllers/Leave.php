@@ -92,7 +92,11 @@ class Leave extends BaseController
         ->join('employee', 'employee.Employee_ID = leave_request.Employee_ID')
         ->findAll();
 
-        return view('ApprovalLeave', ['leave' => $leave]);
+        if (session('position') !== 'Admin') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }else{
+            return view('ApprovalLeave', ['leave' => $leave]);
+        }
     }
 
     public function approve($Leave_ID)

@@ -91,7 +91,11 @@ class Overtime extends BaseController
         ->join('employee', 'employee.Employee_ID = overtime.Employee_ID')
         ->findAll();
 
-        return view('ApprovalOvertime', ['overtime' => $overtime]);
+        if (session('position') !== 'Admin') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }else{
+            return view('ApprovalOvertime', ['overtime' => $overtime]);
+        }
     }
 
     public function approve($Overtime_ID)

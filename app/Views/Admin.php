@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflow Dashboard</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- For ☰ icon -->
     <style>
         body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #ffffff;
-            color: #000;
+            background-color: #f8f9fa;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #5b0ab3, #2575fc);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            color: #fff;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo img {
-            height: 80px;
-            margin-right: 15px;
-            border-radius: 40%;
-        }
-        .logo span {
-            font-size: 25px;
+
+        header {
+            background: linear-gradient(135deg, #2575fc, #5b0ab3);
+            padding: 20px;
+            color: white;
+            font-size: 1.5rem;
             font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
         .menu {
             cursor: pointer;
             font-size: 20px;
             position: relative;
             transition: transform 0.3s ease, color 0.3s ease;
         }
-        .menu:hover {
-            transform: scale(1.1);
-            color: #0000ff;
-        }
+
         .dropdown {
             display: none;
             position: absolute;
             right: 0;
-            top: 50px;
+            top: 40px;
             background: #ffffff;
             color: #000;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -56,240 +57,124 @@
             z-index: 1000;
             animation: fadeIn 0.3s ease;
         }
+
         .dropdown a {
             display: block;
-            padding: 8px 8px;
-            text-decoration: none;
-            color: #000000;
+            padding: 10px 15px;
             font-size: 14px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: normal;
+            text-decoration: none;
+            color: #2d2d2d;
         }
+
         .dropdown a:hover {
-            background-color: #0000ff;
-            color: #fff;
-        }
-        @keyframes fadeIn {
-            from {
-            opacity: 0;
-            transform: translateY(-10px);
-            }
-            to {
-            opacity: 1;
-            transform: translateY(0);
-            }
-        }
-        .welcome {
-            text-align: center;
-            margin: 30px auto 10px;
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .welcome h1 {
-            font-size: 26px;
-            font-weight: bold;
-             background: linear-gradient(135deg, #5b0ab3, #2575fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #000;
-            width: 0;
-            animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end 4;
-            margin-bottom: 10px;
-        }
-
-        .welcome p {
-            color: #333;
-            font-size: 16px;
-            opacity: 0.9;
-            animation: fadeIn 2s ease forwards;
-            animation-delay: 1s;
-        }
-
-        @keyframes fadeInUp {
-            from {
-            opacity: 0;
-            transform: translateY(20px);
-            }
-            to {
-            opacity: 1;
-            transform: translateY(0);
-            }
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            0%, 100% { border-color: transparent }
-            50% { border-color: #000 }
+            background: #f0f0f0;
         }
 
         .container {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-        .container::-webkit-scrollbar {
-            display: none;
+            margin-top: 50px;
         }
 
         .card {
-            flex: 0 0 18%;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-width: 120px;
-            height: 150px;
-            background: linear-gradient(135deg, #ffffff, #ffffff);
-            border-radius: 12px;
-            border: none;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 20px 25px rgba(0, 0, 0, 0.1), inset 0 0 12px rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .card:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #ffffff, #ffffff);
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: opacity 0.4s ease;
-            opacity: 0;
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card img {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover img {
-            transform: rotate(10deg) scale(1.1);
-        }
-
-        .card span {
-            font-size: 16px;
-            font-weight: bold;
-            color: #000;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            transition: color 0.4s ease;
-        }
-
-        .card:hover span {
-            color: #0000ff;
-        }
-
-        .footer {
-           background: linear-gradient(135deg, #5b0ab3, #2575fc);
-            padding: 15px 30px;
-            text-align: center;
-            color: #fff;
-            font-size: 14px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content p {
-            margin: 5px 0;
-            animation: fadeIn 1s ease forwards;
+        .btn-custom:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <div class="logo">
-            <img src="Logo Putih.png" alt="Workflow">
-            <span>Employee Management System</span>
-        </div>
-        <div class="menu" onclick="toggleMenu()">☰
-            <div class="dropdown" id="menuDropdown">
-                <a href="/dashboard">Dashboard</a>
-                <a href="/department">Department</a>
-                <a href="/overtime/approval">Overtime Request</a>
-                <a href="/leave/approval">Leave Request</a>
-                <a href="/employee">Employee</a>
-                <a href="/project">Project</a>
-                <a href="/salary">Salary</a>
-                <a href="/client">Client</a>
-                <a href="/logout">Logout</a>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <img src="Workflow.png" alt="Workflow">
+                <span>WORKFLOW</span>
+            </div>
+                <div class="menu" onclick="toggleMenu()">☰
+                    <div class="dropdown" id="menuDropdown">
+                        <a href="/dashboard">Dashboard</a>
+                        <a href="/admin">Admin</a>
+                        <a href="/department">Department</a>
+                        <a href="/overtime/approval">Overtime Request</a>
+                        <a href="/leave/approval">Leave Request</a>
+                        <a href="/project">Project</a>
+                        <a href="/client">Client</a>
+                        <a href="/salary">Finance</a>
+                        <a href="/logout">Logout</a>
+                </div>
             </div>
         </div>
-    </div>
+    </header>
 
     <script>
         function toggleMenu() {
             const dropdown = document.getElementById('menuDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            dropdown.style.display = dropdown.style.display === 'block' || dropdown.style.display === '' ? 'none' : 'block';
         }
 
         window.onclick = function(event) {
             const dropdown = document.getElementById('menuDropdown');
-            if (!event.target.closest('.menu')) {
+            if (!event.target.closest('.menu') && dropdown.style.display === 'block') {
                 dropdown.style.display = 'none';
             }
         }
     </script>
 
-    <table border="1">
-        <tr>
-            <th>Employee ID</th>
-            <th>Status</th>
-            <th>Clock</th>
-            <th>Username</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Work Email</th>
-            <th>Phone Number</th>
-        </tr>
-        <?php foreach ($employee as $employee): ?>
-        <tr>
-            <td><?= esc($employee['Employee_ID']) ?></td>
-            <td>
-                <?= isset($employee['is_online']) && $employee['is_online'] ? 'Online' : 'Offline' ?>
-            </td>
-            <td>
-                <?= isset($employee['is_clocked_in']) && $employee['is_clocked_in'] ? 'Clocked In' : 'Clocked Out' ?>
-            </td>
-            <td><?= esc($employee['Username']) ?></td>
-            <td><?= esc($employee['First_Name']) ?></td>
-            <td><?= esc($employee['Last_Name']) ?></td>
-            <td><?= esc($employee['Work_Email']) ?></td>
-            <td><?= esc($employee['Phone_Number']) ?></td>
-            <td><a href="/employee/edit/<?= esc($employee['Employee_ID']) ?>">Edit</a><td>
-            <td><a href="/employee/delete/<?= esc($employee['Employee_ID']) ?>">Delete</a><td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-    
+    <div class="container">
+        <h1 class="text-center mb-4">Admin</h1>
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4>Employee List</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Status</th>
+                            <th>Clock</th>
+                            <th>Username</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Work Email</th>
+                            <th>Phone Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($employee as $employee): ?>
+                        <tr>
+                            <td><?= esc($employee['Employee_ID']) ?></td>
+                            <td>
+                                <?= isset($employee['is_online']) && $employee['is_online'] ? 'Online' : 'Offline' ?>
+                            </td>
+                            <td>
+                                <?= isset($employee['is_clocked_in']) && $employee['is_clocked_in'] ? 'Clocked In' : 'Clocked Out' ?>
+                            </td>
+                            <td><?= esc($employee['Username']) ?></td>
+                            <td><?= esc($employee['First_Name']) ?></td>
+                            <td><?= esc($employee['Last_Name']) ?></td>
+                            <td><?= esc($employee['Work_Email']) ?></td>
+                            <td><?= esc($employee['Phone_Number']) ?></td>
+                            <td><a href="/employee/edit/<?= esc($employee['Employee_ID']) ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="/employee/delete/<?= esc($employee['Employee_ID']) ?>" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <a href="/employee/add" class="btn btn-custom">Add New Employee</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -21,8 +21,8 @@ class Attendance extends BaseController
             ->orderBy('Attendance_ID', 'DESC')
             ->findAll();
 
-        $userModel = new UserModel();
-        $user = $userModel->find($employee_id);
+        $UserModel = new UserModel();
+        $user = $UserModel->find($employee_id);
         $check = $user['is_clocked_in']; // TRUE = sudah check-in
 
         return view('Attendance', [

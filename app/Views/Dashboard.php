@@ -39,15 +39,12 @@
             position: relative;
             transition: transform 0.3s ease, color 0.3s ease;
         }
-        .menu:hover {
-            transform: scale(1.1);
-            color: #0000ff;
-        }
+     
         .dropdown {
             display: none;
             position: absolute;
             right: 0;
-            top: 50px;
+            top: 40px;
             background: #ffffff;
             color: #000;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -58,7 +55,7 @@
         }
         .dropdown a {
             display: block;
-            padding: 8px 8px;
+            padding: 5px 5px;
             text-decoration: none;
             color: #000000;
             font-size: 14px;
@@ -155,7 +152,10 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 20px 25px rgba(0, 0, 0, 0.1), inset 0 0 12px rgba(255, 255, 255, 0.6);
             cursor: pointer;
             transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+            bottom: -10px;
             position: relative;
+            padding: 10px;
+            margin: 50px;
             overflow: hidden;
         }
 
@@ -183,8 +183,8 @@
         }
 
         .card img {
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             margin-bottom: 8px;
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
             transition: transform 0.4s ease;
@@ -212,7 +212,7 @@
             text-align: center;
             color: #fff;
             font-size: 14px;
-            position: fixed;
+            position: absolute;
             bottom: 0;
             width: 100%;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -244,6 +244,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onclick = function(event) {
+            const dropdown = document.getElementById('menuDropdown');
+            if (!event.target.closest('.menu')) {
+                dropdown.style.display = 'none';
+            }
+        }
+    </script>
 
     <div class="welcome">
         <h1>Welcome to Workflow Employee Information System</h1>
@@ -282,20 +296,6 @@
           </div>
         <?php endif; ?>
     </div>
-
-    <script>
-        function toggleMenu() {
-            const dropdown = document.getElementById('menuDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        window.onclick = function(event) {
-            const dropdown = document.getElementById('menuDropdown');
-            if (!event.target.closest('.menu')) {
-                dropdown.style.display = 'none';
-            }
-        }
-    </script>
 
     <footer class="footer">
     <div class="footer-content">

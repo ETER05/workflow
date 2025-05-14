@@ -24,9 +24,7 @@ class Client extends BaseController
             return redirect()->to('/login');
         }
 
-        $position= session()->get('position');
-
-        if ($position !== 'Admin') {
+        if (session('position') !== 'Admin') {
             return redirect()->to('/dashboard')->with('error', 'Access denied');
         }else{
             return view('AddClient');
@@ -77,12 +75,10 @@ class Client extends BaseController
         $ClientData = $ClientModel->find($Client_ID);
 
         if (!$ClientData){
-            return redirect()->to('/admin')->with('error', 'User not found');
+            return redirect()->to('/admin')->with('error', 'Client not found');
         }
 
-        $position= session()->get('position');
-
-        if ($position !== 'Admin') {
+        if (session('position') !== 'Admin') {
             return redirect()->to('/dashboard')->with('error', 'Access denied');
         }else{
             return view('EditClient', ['ClientData' => $ClientData]);
@@ -139,10 +135,10 @@ class Client extends BaseController
         $ClientData = $ClientModel->find($Client_ID);
 
         if (!$ClientData){
-            return redirect()->to('/admin')->with('error', 'Department not found');
+            return redirect()->to('/admin')->with('error', 'Client not found');
         }
 
         $ClientModel->delete($ClientData['Client_ID']);
-        return redirect()->to('/client')->with('success', 'Delete employee successfully!');
+        return redirect()->to('/client')->with('success', 'Delete client successfully!');
     }
 }

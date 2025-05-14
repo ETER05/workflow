@@ -23,9 +23,7 @@ class Department extends BaseController
             return redirect()->to('/login');
         }
 
-        $position= session()->get('position');
-
-        if ($position !== 'Admin') {
+        if (session('position') !== 'Admin') {
             return redirect()->to('/dashboard')->with('error', 'Access denied');
         }else{
             return view('AddDepartment');
@@ -78,9 +76,7 @@ class Department extends BaseController
             return redirect()->to('/admin')->with('error', 'User not found');
         }
 
-        $position= session()->get('position');
-
-        if ($position !== 'Admin') {
+        if (session('position') !== 'Admin') {
             return redirect()->to('/dashboard')->with('error', 'Access denied');
         }else{
             return view('EditDepartment', ['DepartmentData' => $DepartmentData]);
