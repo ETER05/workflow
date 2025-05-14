@@ -30,6 +30,9 @@ class Auth extends BaseController
                 'position' => $user['Position'],
                 'logged_in' => true
             ]);
+
+            $model->update($user['Employee_ID'], ['is_online' => 1]);
+
             return redirect()->to('/dashboard');
         } else {
             return redirect()->back()->with('error', 'Login gagal');
@@ -38,6 +41,11 @@ class Auth extends BaseController
 
     public function logout()
     {
+        $employee_id = session()->get('employee_id');
+
+        $model = new UserModel();
+        $model->update($employee_id, ['is_online' => 0]);
+
         session()->destroy();
         return redirect()->to('/login');
     }

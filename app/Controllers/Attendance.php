@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\AttendanceModel;
+use App\Models\UserModel;
 
 class Attendance extends BaseController
 {
@@ -11,13 +12,24 @@ class Attendance extends BaseController
             return redirect()->to('/login');
         }
 
-        $check = session()->get('check');
-
         $username = session()->get('username');
         $employee_id = session()->get('employee_id');
-        $model = new \App\Models\AttendanceModel();
-        $attendance = $model->where('employee_id', $employee_id)->orderBy('Attendance_ID', 'DESC')->findAll();
-        return view('Attendance', ['attendance' => $attendance, 'username' => $username, 'check' => $check]);
+
+        $attendanceModel = new AttendanceModel();
+        $attendance = $attendanceModel
+            ->where('employee_id', $employee_id)
+            ->orderBy('Attendance_ID', 'DESC')
+            ->findAll();
+
+        $userModel = new UserModel();
+        $user = $userModel->find($employee_id);
+        $check = $user['is_clocked_in']; // TRUE = sudah check-in
+
+        return view('Attendance', [
+            'attendance' => $attendance,
+            'username' => $username,
+            'check' => $check,
+        ]);
     }
 
     public function checkin()
@@ -27,7 +39,8 @@ class Attendance extends BaseController
         }
 
         $employee_id = session()->get('employee_id');
-        $model = new \App\Models\AttendanceModel();
+        $model = new AttendanceModel();
+        $UserModel = new UserModel();
 
         date_default_timezone_set('Asia/Jakarta');
         $today = date('Y-m-d');
@@ -38,11 +51,7 @@ class Attendance extends BaseController
             'In_Time' => date('H:i:s'),
         ]);
 
-        $check = session();
-        $check->set([
-            'check' => true,
-        ]);
-
+        $UserModel->update($employee_id, ['is_clocked_in' => 1]);
         return redirect()->to('/attendance');
     }
 
@@ -53,6 +62,7 @@ class Attendance extends BaseController
         }
 
         $model = new \App\Models\AttendanceModel();
+        $UserModel = new UserModel();
 
         date_default_timezone_set('Asia/Jakarta');
         $today = date('Y-m-d');
@@ -65,7 +75,7 @@ class Attendance extends BaseController
         ->first();
 
         $model->update($existing['Attendance_ID'], ['Out_Time' => date('H:i:s')]);
-        session()->set('check', false);
+        $UserModel->update($employee_id, ['is_clocked_in' => 0]);
 
         return redirect()->to('/attendance');
     }

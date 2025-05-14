@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f9, #e8e8f0);
+            color: #333;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+        .sidebar a {
+            display: block;
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .sidebar a:hover {
+            background: #1abc9c;
+            transform: translateX(5px);
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            background: #f9f9fc;
+            min-height: 100vh;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <a href="#department">Department</a>
+        <a href="#overtime">Overtime Request</a>
+        <a href="#leave">Leave Request</a>
+        <a href="#employee">Add Employee</a>
+        <a href="#project">Add Project</a>
+        <a href="#client">Client</a>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h1>Welcome, Admin</h1>
+        </div>
+        <div id="department" class="card">
+            <h3>Department</h3>
+            <p>Manage and organize departments within the company.</p>
+        </div>
+        <div id="overtime" class="card">
+            <h3>Overtime Request</h3>
+            <p>Review and approve employee overtime requests.</p>
+        </div>
+        <div id="leave" class="card">
+            <h3>Leave Request</h3>
+            <p>Manage employee leave requests efficiently.</p>
+        </div>
+        <div id="employee" class="card">
+            <h3>Add Employee</h3>
+            <p>Add new employees to the system.</p>
+        </div>
+        <div id="project" class="card">
+            <h3>Add Project</h3>
+            <p>Create and assign new projects to teams.</p>
+        </div>
+        <div id="client" class="card">
+            <h3>Client</h3>
+            <p>Manage client information and relationships.</p>
+        </div>
+    </div>
+</body>
+</html>

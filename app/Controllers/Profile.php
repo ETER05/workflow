@@ -78,10 +78,8 @@ class Profile extends BaseController
                     'Employee_Password' => $this->request->getPost('Employee_Password'),
                     'Work_Email' => $this->request->getPost('Work_Email'),
                     'Phone_Number' => $this->request->getPost('Phone_Number'),
-                    // Data yang akan diupdate
                 ];
 
-                // Update data di database
                 $userModel->update($userData['Employee_ID'], $updatedData);
 
                 return redirect()->to('/profile')->with('success', 'Profile updated successfully!');

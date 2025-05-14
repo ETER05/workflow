@@ -8,17 +8,17 @@
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #3842f8, #6a74ff);
-            color: #fff;
+            background: #ffffff;
+            color: #000;
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background: rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #5b0ab3, #2575fc);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
+            color: #fff;
         }
         .logo {
             display: flex;
@@ -35,20 +35,21 @@
         }
         .menu {
             cursor: pointer;
-            font-size: 28px;
+            font-size: 20px;
             position: relative;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         .menu:hover {
             transform: scale(1.1);
+            color: #0000ff;
         }
         .dropdown {
             display: none;
             position: absolute;
             right: 0;
             top: 50px;
-            background: rgba(255, 255, 255, 0.9);
-            color: black;
+            background: #ffffff;
+            color: #000;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
             overflow: hidden;
@@ -57,80 +58,75 @@
         }
         .dropdown a {
             display: block;
-            padding: 12px 20px;
+            padding: 8px 8px;
             text-decoration: none;
-            color: #333;
-            font-size: 16px;
+            color: #000000;
+            font-size: 14px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         .dropdown a:hover {
-            background-color: #4f4fff;
-            color: white;
+            background-color: #0000ff;
+            color: #fff;
         }
         @keyframes fadeIn {
             from {
-                opacity: 0;
-                transform: translateY(-10px);
+            opacity: 0;
+            transform: translateY(-10px);
             }
             to {
-                opacity: 1;
-                transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
             }
         }
         .welcome {
-    text-align: center;
-    margin: 30px auto 10px;
-    animation: fadeInUp 1s ease forwards;
-}
+            text-align: center;
+            margin: 30px auto 10px;
+            animation: fadeInUp 1s ease forwards;
+        }
 
-.welcome h1 {
-    font-size: 26px;
-    font-weight: bold;
-    background: linear-gradient(90deg, #ffffff, #c0c8ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid #fff;
-    width: 0;
-    animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end 4;
-    margin-bottom: 10px;
-}
+        .welcome h1 {
+            font-size: 26px;
+            font-weight: bold;
+             background: linear-gradient(135deg, #5b0ab3, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #000;
+            width: 0;
+            animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end 4;
+            margin-bottom: 10px;
+        }
 
+        .welcome p {
+            color: #333;
+            font-size: 16px;
+            opacity: 0.9;
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 1s;
+        }
 
-.welcome p {
-    color: #eee;
-    font-size: 16px;
-    opacity: 0.9;
-    animation: fadeIn 2s ease forwards;
-    animation-delay: 1s;
-}
+        @keyframes fadeInUp {
+            from {
+            opacity: 0;
+            transform: translateY(20px);
+            }
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
 
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
+        @keyframes blink-caret {
+            0%, 100% { border-color: transparent }
+            50% { border-color: #000 }
+        }
 
-@keyframes blink-caret {
-    0%, 100% { border-color: transparent }
-    50% { border-color: #fff }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0 }
-    to { opacity: 1 }
-}
         .container {
             display: flex;
             overflow-x: auto;
@@ -144,61 +140,95 @@
             display: none;
         }
 
-       .card {
-            flex: 0 0 22%;
+        .card {
+            flex: 0 0 18%;
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-width: 150px;
+            min-width: 120px;
             height: 150px;
-            background: linear-gradient(135deg, #ffffff, #e0e0ff);
+            background: linear-gradient(135deg, #ffffff, #ffffff);
             border-radius: 12px;
             border: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 20px 25px rgba(0, 0, 0, 0.1), inset 0 0 12px rgba(255, 255, 255, 0.6);
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
         .card:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #ffffff, #ffffff);
         }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
         .card img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            width: 70px;
+            height: 70px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+            transition: transform 0.4s ease;
         }
+
+        .card:hover img {
+            transform: rotate(10deg) scale(1.1);
+        }
+
         .card span {
             font-size: 16px;
             font-weight: bold;
-            color: #333;
+            color: #000;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: color 0.4s ease;
+        }
+
+        .card:hover span {
+            color: #0000ff;
         }
 
         .footer {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 15px 30px;
-    text-align: center;
-    color: #fff;
-    font-size: 14px;
-    margin-top: 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
+           background: linear-gradient(135deg, #5b0ab3, #2575fc);
+            padding: 15px 30px;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-.footer-content p {
-    margin: 5px 0;
-    animation: fadeIn 1s ease forwards;
-}
-
+        .footer-content p {
+            margin: 5px 0;
+            animation: fadeIn 1s ease forwards;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="logo">
-            <img src="Logo Putih.png" alt="ICEHRM">
+            <img src="Logo Putih.png" alt="Workflow">
             <span>Employee Management System</span>
         </div>
         <div class="menu" onclick="toggleMenu()">☰
@@ -206,7 +236,7 @@
                 <a href="/profile">Profile</a>
                 <a href="/attendance">Attendance</a>
                 <a href="/project">Project</a>
-                <a href="/finance">Finance</a>
+                <a href="/salary/view">Finance</a>
                 <?php if(session('position') == 'Admin'):?>
                   <a href="/admin">Admin</a>
                 <?php endif;?>
@@ -216,9 +246,9 @@
     </div>
 
     <div class="welcome">
-  <h1>Selamat Datang di Workflow Sistem Informasi Pegawai</h1>
-  <p>Kelola data kepegawaian Anda dengan mudah dan cepat.</p>
-</div>
+        <h1>Welcome to Workflow Employee Information System</h1>
+        <p>Manage your employee data easily and quickly.</p>
+    </div>
 
     <div class="container">
         <div class="card" onclick="window.location.href='/profile'">
@@ -230,10 +260,10 @@
             <span>Attendance</span>
         </div>
         <div class="card" onclick="window.location.href='/project'">
-            <img src="<?= base_url('Project.png') ?>" alt="Proyek">
+            <img src="<?= base_url('Ikon Project.png') ?>" alt="Proyek">
             <span>Project</span>
         </div>
-        <div class="card" onclick="window.location.href='/finance'">
+        <div class="card" onclick="window.location.href='/salary/view'">
             <img src="<?= base_url('finance.png') ?>" alt="Keuangan">
             <span>Finance</span>
         </div>
@@ -272,6 +302,6 @@
         <p>&copy; 2025 Employee Management System - Workflow</p>
         <p>Developed by Tim IT Workflow</p>
     </div>
-</footer>
+    </footer>
 </body>
 </html>

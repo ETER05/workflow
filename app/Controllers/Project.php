@@ -212,38 +212,47 @@ class Project extends BaseController
         if (!$project) {
             return redirect()->to('/project')->with('error', 'Project not found');
         }
+
+        $employeeId = session()->get('employee_id');
+        if (!$employeeId) {
+            return redirect()->to('/project/view/' . $Project_ID)->with('error', 'Employee not logged in.');
+        }
     
         $validation = \Config\Services::validation();
         $validation->setRules([
-            'document' => 'uploaded[document]|max_size[document,10240]|ext_in[document,pdf,doc,docx]'
+            'document' => 'uploaded[document]'
         ]);
     
-        if ($this->request->getMethod() === 'post' && $validation->withRequest($this->request)->run()) {
+        if ($this->request->getMethod() === 'POST' && $validation->withRequest($this->request)->run()) {
             $file = $this->request->getFile('document');
             $documentPath = WRITEPATH . 'uploads/' . $Project_ID;
-    
+        
             if (!is_dir($documentPath)) {
                 mkdir($documentPath, 0777, true);
             }
-    
+        
+            $originalName = $file->getName();
+        
+            // Cek apakah sudah ada file dengan nama dan ekstensi yang sama
+            if (file_exists($documentPath . '/' . $originalName)) {
+                return redirect()->to('/project/view/' . $Project_ID)->with('error', 'File dengan nama tersebut sudah ada.');
+            }
+        
             if ($file->isValid() && !$file->hasMoved()) {
-                $newName = $file->getRandomName();
-                $file->move($documentPath, $newName);
-    
-                // Simpan ke tabel employee_project
+                $file->move($documentPath, $originalName);
+        
+                // Simpan ke database
                 $EmployeeProjectModel = new \App\Models\Employee_ProjectModel();
                 $EmployeeProjectModel->insert([
-                    'Employee_ID' => session()->get('employee_id'), // Pastikan ini diset di session
+                    'Employee_ID' => session()->get('employee_id'),
                     'Project_ID' => $Project_ID,
-                    'Document' => $newName
+                    'Document' => $originalName
                 ]);
-    
+        
                 return redirect()->to('/project/view/' . $Project_ID)->with('success', 'File uploaded successfully!');
             } else {
                 return redirect()->to('/project/view/' . $Project_ID)->with('error', 'Failed to upload file.');
             }
-        } else {
-            return redirect()->to('/project/view/' . $Project_ID)->with('error', $validation->getErrors());
         }
     }
     

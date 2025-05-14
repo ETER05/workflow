@@ -69,7 +69,12 @@ $routes->get('/project/view/(:segment)', 'Project::view/$1');
 $routes->post('/project/upload/(:num)', 'Project::upload/$1');
 $routes->get('/project/download/(:num)/(:any)', 'Project::download/$1/$2');
 $routes->get('/project/deletefile/(:num)/(:num)', 'Project::deletefile/$1/$2');
-
-//working on it
-
-$routes->get('/finance', 'Finance::index');
+//salary
+$routes->get('/salary/view', 'Salary::view');
+$routes->get('/salary', 'Salary::admin');
+$routes->get('/salary/admin', 'Salary::admin');
+$routes->get('/salary/add', 'Salary::add');
+$routes->post('/salary/addprocess', 'Salary::addprocess');
+$routes->get('/salary/edit/(:segment)', 'Salary::edit/$1');
+$routes->post('/salary/editprocess/(:segment)', 'Salary::editprocess/$1');
+$routes->get('/salary/delete/(:segment)', 'Salary::delete/$1');
