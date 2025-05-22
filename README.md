@@ -1,18 +1,8 @@
 # WorkFlow : Sistem Manajemen Pegawai
 
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
-
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
-
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
-
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## DESKRIPSI
+WorkFlow merupakan sistem manajemen kepegawaian modern yang dirancang untuk menyediakan layanan pengelolaan sumber daya manusia secara terintegrasi. Sistem ini mencakup berbagai fungsi utama seperti manajemen data karyawan, pencatatan absensi, pengajuan cuti, pengelolaan penggajian, evaluasi kinerja, pelacakan waktu kerja, hingga pelaporan dan analitik. Dengan menggunakan WorkFlow, perusahaan dapat meningkatkan efisiensi dan efektivitas dalam mengelola seluruh siklus hidup pegawai, dari rekrutmen hingga terminasi, secara akurat dan otomatis.
+Sistem ini tentunya membantu perusahaan dalam mencapai tujuan bisnis strategis seperti peningkatan produktivitas tenaga kerja, efisiensi biaya operasional, pengurangan kesalahan administratif, serta penciptaan lingkungan kerja yang lebih transparan dan akuntabel. WorkFlow juga mendukung pengambilan keputusan yang lebih cepat dan berbasis data, khususnya dalam hal perencanaan SDM, pengembangan karyawan, serta pengelolaan kinerja individu maupun tim secara berkelanjutan.
 
 ## Installation & updates
 
