@@ -21,10 +21,10 @@ class Admin extends BaseController
             return redirect()->to('/login')->with('error', 'User not found');
         }
 
-        if (session('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('Admin', ['employee' => $employee, 'userData' => $userData]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Models\ManagerModel;
 
 class Employee extends BaseController
 {
@@ -11,10 +12,10 @@ class Employee extends BaseController
             return redirect()->to('/login');
         }
 
-        if (session('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('AddEmployee');
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 
@@ -48,7 +49,7 @@ class Employee extends BaseController
                 $department = $departmentModel->find($this->request->getPost('Department_ID'));
 
                 if (!$department) {
-                    return redirect()->to('/addemployee')->with('error', 'Department ID not valid');
+                    return redirect()->to('/employee/add')->with('error', 'Department ID not valid');
                 }
 
                 $insertData = [
@@ -57,12 +58,24 @@ class Employee extends BaseController
                     'Username' => $this->request->getPost('Username'),
                     'First_Name' => $this->request->getPost('First_Name'),
                     'Last_Name' => $this->request->getPost('Last_Name'),
+                    'Position' => $this->request->getPost('Position'),
                     'Employee_Password' => $this->request->getPost('Employee_Password'),
                     'Work_Email' => $this->request->getPost('Work_Email'),
                     'Phone_Number' => $this->request->getPost('Phone_Number'),
                 ];
 
                 $userModel->insert($insertData);
+
+                if ($insertData['Position'] === 'Manager') {
+                    $ManagerModel = new ManagerModel();
+                
+                    $ManagerData = [
+                        'Manager_ID' => $insertData['Employee_ID'],
+                        'Employee_ID' => $insertData['Employee_ID'],
+                    ];
+                
+                    $ManagerModel->insert($ManagerData);
+                }
 
                 return redirect()->to('/admin')->with('success', 'Add employee successfully!');
             } else {
@@ -84,10 +97,10 @@ class Employee extends BaseController
             return redirect()->to('/admin')->with('error', 'User not found');
         }
 
-        if (session('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('EditEmployee', ['userData' => $userData]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 
@@ -128,12 +141,35 @@ class Employee extends BaseController
                     'Username' => $this->request->getPost('Username'),
                     'First_Name' => $this->request->getPost('First_Name'),
                     'Last_Name' => $this->request->getPost('Last_Name'),
+                    'Position' => $this->request->getPost('Position'),
                     'Employee_Password' => $this->request->getPost('Employee_Password'),
                     'Work_Email' => $this->request->getPost('Work_Email'),
                     'Phone_Number' => $this->request->getPost('Phone_Number'),
                 ];
 
                 $userModel->update($userData['Employee_ID'], $updatedData);
+
+                $ManagerModel = new ManagerModel();
+                // Cek apakah posisi sekarang adalah Manager
+                if ($updatedData['Position'] === 'Manager') {
+                    // Cek apakah sudah ada di tabel manager
+                    $existingManager = $ManagerModel->find($updatedData['Employee_ID']);
+
+                    // Jika belum ada, insert
+                    if (!$existingManager) {
+                        $ManagerModel->insert([
+                            'Manager_ID' => $updatedData['Employee_ID'],
+                            'Employee_ID' => $updatedData['Employee_ID'],
+                            // tambah kolom jika perlu
+                        ]);
+                    }
+                } else {
+                    // Jika posisi bukan manager dan sebelumnya ada di tabel manager, hapus
+                    $existingManager = $ManagerModel->find($updatedData['Employee_ID']);
+                    if ($existingManager) {
+                        $ManagerModel->delete($updatedData['Employee_ID']);
+                    }
+                }
 
                 return redirect()->to('/admin')->with('success', 'Edit employee successfully!');
             } else {
@@ -156,6 +192,14 @@ class Employee extends BaseController
         }
 
         $userModel->delete($userData['Employee_ID']);
+
+        // Hapus juga dari tabel Manager jika ada
+        $ManagerModel = new ManagerModel();
+        $existingManager = $ManagerModel->find($userData['Employee_ID']);
+        if ($existingManager) {
+            $ManagerModel->delete($userData['Employee_ID']);
+        }
+
         return redirect()->to('/admin')->with('success', 'Delete employee successfully!');
     }
 }

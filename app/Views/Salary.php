@@ -97,8 +97,9 @@
                 <img src="Workflow.png" alt="WF">
                 <span>WORKFLOW</span>
             </div>
-                <div class="menu" onclick="toggleMenu()">☰
-                    <div class="dropdown" id="menuDropdown">
+            <div class="menu" onclick="toggleMenu()">☰
+                <div class="dropdown" id="menuDropdown">
+                    <a href="/dashboard">Dashboard</a>
                     <a href="/profile">Profile</a>
                     <a href="/attendance">Attendance</a>
                     <a href="/project">Project</a>
@@ -142,15 +143,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($salary as $row): ?>
+                    <?php foreach ($salary as $salary): ?>
                         <tr>
-                            <td><?= esc($row['Salary_Date']) ?></td>
-                            <td><?= esc($row['Salary_Amount']) ?></td>
+                            <td><?= esc($salary['Salary_Date']) ?></td>
+                            <td><?= esc($salary['Salary_Amount']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
                 </table>
-                <a href="/client/add" class="btn btn-custom">Add New Client</a>
             </div>
         </div>
     </div>

@@ -40,10 +40,10 @@ class Project extends BaseController
 
         $client = $ClientModel->findAll();
 
-        if (session('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('AddProject', ['manager' => $manager, 'client' => $client]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 
@@ -107,12 +107,10 @@ class Project extends BaseController
             return redirect()->to('/admin')->with('error', 'User not found');
         }
 
-        $position= session()->get('position');
-
-        if ($position !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('EditProject', ['ProjectData' => $ProjectData, 'manager' => $manager, 'client' => $client]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 

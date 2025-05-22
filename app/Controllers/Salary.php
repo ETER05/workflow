@@ -32,7 +32,12 @@ class Salary extends BaseController
                 ->join('employee', 'employee.Employee_ID = salary.Employee_ID')
                 ->findAll();
 
-        return view('SalaryAdmin', ['salary' => $salary]);
+        
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
+            return view('SalaryAdmin', ['salary' => $salary]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }
     }
 
     public function add()
@@ -47,10 +52,10 @@ class Salary extends BaseController
         $builder->select('Employee_ID, Username');
         $employee = $builder->get()->getResultArray();
 
-        if (session()->get('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('AddSalary', ['employee' => $employee]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 
@@ -106,12 +111,10 @@ class Salary extends BaseController
             return redirect()->to('/admin')->with('error', 'User not found');
         }
 
-        $position= session()->get('position');
-
-        if ($position !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('EditSalary', ['SalaryData' => $SalaryData, 'employee' => $employee]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 

@@ -97,8 +97,9 @@
                 <img src="Workflow.png" alt="WF">
                 <span>WORKFLOW</span>
             </div>
-                <div class="menu" onclick="toggleMenu()">☰
-                    <div class="dropdown" id="menuDropdown">
+            <div class="menu" onclick="toggleMenu()">☰
+                <div class="dropdown" id="menuDropdown">
+                    <a href="/dashboard">Dashboard</a>
                     <a href="/profile">Profile</a>
                     <a href="/attendance">Attendance</a>
                     <a href="/project">Project</a>
@@ -134,7 +135,7 @@
                 <h4>Project List</h4>
             </div>
             <div class="card-body">
-            <?php if(session('position') == 'Admin'):?>
+            <?php if(session('position') == 'Admin' || session('position') == 'Manager'):?>
                 <a href="/project/add" class="btn btn-custom">Add New Project</a>
             <?php endif;?> 
                 <table class="table table-bordered">
@@ -146,7 +147,7 @@
                             <th>Manager</th>
                             <th>Client</th>
                             <th>Works On</th>
-                            <?php if(session('position') == 'Admin'):?>
+                            <?php if(session('position') == 'Admin' || session('position') == 'Manager'):?>
                                 <th>Actions</th>
                             <?php endif;?> 
                         </tr>
@@ -160,7 +161,7 @@
                             <td><?= esc($project['Manager_Name']) ?></td>
                             <td><?= esc($project['Client_Name']) ?></td>
                             <td><a href="/project/view/<?= esc($project['Project_ID']) ?>">Details</a></td>
-                            <?php if(session('position') == 'Admin'):?>
+                            <?php if(session('position') == 'Admin' || session('position') == 'Manager'):?>
                                 <td><a href="/project/edit/<?= esc($project['Project_ID']) ?>" class="btn btn-warning btn-sm">Edit</a>
                                 <a href="/project/delete/<?= esc($project['Project_ID']) ?>" class="btn btn-danger btn-sm">Delete</a></td>
                             <?php endif;?> 

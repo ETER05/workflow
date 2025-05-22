@@ -68,7 +68,7 @@
         }
 
         .dropdown a:hover {
-            background: #f0f0f0;
+            background: #f0f0fa;
         }
 
         .container {
@@ -143,7 +143,7 @@
     <header>
         <div class="header-container">
             <div class="header-left">
-                <img src="Workflow.png" alt="WF">
+                <img src="<?= base_url("Workflow.png") ?>" alt="WF">
                 <span>WORKFLOW</span>
             </div>
                 <div class="menu" onclick="toggleMenu()">☰
@@ -192,6 +192,14 @@
 
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="Last_Name">
+
+            <label for="Position">Position</label>
+            <select id="Position" name="Position" required>
+                <option value="">-- Choose Position --</option>
+                <option value="Employee">Employee</option>
+                <option value="Manager">Manager</option>
+                <option value="Admin">Admin</option>
+            </select>
 
             <label for="username">Username:</label>
             <input type="text" id="username" name="Username">

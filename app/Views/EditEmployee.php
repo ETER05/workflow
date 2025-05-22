@@ -193,6 +193,13 @@
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="Last_Name" value="<?= esc($userData['Last_Name']) ?>">
 
+            <select id="Position" name="Position" required>
+                <option value="Employee" <?= $userData['Position'] === 'Employee' ? 'selected' : '' ?>>Employee</option>
+                <option value="Manager" <?= $userData['Position'] === 'Manager' ? 'selected' : '' ?>>Manager</option>
+                <option value="Admin" <?= $userData['Position'] === 'Admin' ? 'selected' : '' ?>>Admin</option>
+            </select>
+
+
             <label for="username">Username:</label>
             <input type="text" id="username" name="Username" value="<?= esc($userData['Username']) ?>" required>
 

@@ -160,8 +160,9 @@
                 <img src="Workflow.png" alt="WF">
                 <span>WORKFLOW</span>
             </div>
-                <div class="menu" onclick="toggleMenu()">☰
-                    <div class="dropdown" id="menuDropdown">
+            <div class="menu" onclick="toggleMenu()">☰
+                <div class="dropdown" id="menuDropdown">
+                    <a href="/dashboard">Dashboard</a>
                     <a href="/profile">Profile</a>
                     <a href="/attendance">Attendance</a>
                     <a href="/project">Project</a>

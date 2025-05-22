@@ -10,6 +10,8 @@
             font-family: 'Poppins', sans-serif;
             background: #ffffff;
             color: #000;
+
+            overflow: hidden;
         }
         .header {
             display: flex;
@@ -122,6 +124,11 @@
         @keyframes blink-caret {
             0%, 100% { border-color: transparent }
             50% { border-color: #000 }
+        }
+
+        .inscroll{
+            width: 100%;
+            overflow: scroll;
         }
 
         .container {
@@ -237,8 +244,8 @@
                 <a href="/attendance">Attendance</a>
                 <a href="/project">Project</a>
                 <a href="/salary/view">Finance</a>
-                <?php if(session('position') == 'Admin'):?>
-                  <a href="/admin">Admin</a>
+                <?php if(session('position') == 'Admin' || session('position') == 'Manager'):?>
+                    <a href="/admin">Admin</a>
                 <?php endif;?>
                 <a href="/logout">Logout</a>
             </div>
@@ -263,38 +270,40 @@
         <h1>Welcome to Workflow Employee Information System</h1>
         <p>Manage your employee data easily and quickly.</p>
     </div>
-
-    <div class="container">
-        <div class="card" onclick="window.location.href='/profile'">
-            <img src="<?= base_url('Profile.png') ?>" alt="Profil">
-            <span>Profile</span>
+    
+    <div class="inscroll">
+        <div class="container">
+            <div class="card" onclick="window.location.href='/profile'">
+                <img src="<?= base_url('Profile.png') ?>" alt="Profil">
+                <span>Profile</span>
+            </div>
+            <div class="card" onclick="window.location.href='/attendance'">
+                <img src="<?= base_url('Absen.png') ?>" alt="Kehadiran">
+                <span>Attendance</span>
+            </div>
+            <div class="card" onclick="window.location.href='/project'">
+                <img src="<?= base_url('Ikon Project.png') ?>" alt="Proyek">
+                <span>Project</span>
+            </div>
+            <div class="card" onclick="window.location.href='/salary/view'">
+                <img src="<?= base_url('finance.png') ?>" alt="Keuangan">
+                <span>Finance</span>
+            </div>
+            <div class="card" onclick="window.location.href='/department'">
+            <img src="<?= base_url('department ikon.png') ?>" alt="Department">
+                <span>Department</span>
+            </div>
+            <div class="card" onclick="window.location.href='/client'">
+                <img src="<?= base_url('client ikon.png') ?>" alt="Client">
+                <span>Client</span>
+            </div>
+            <?php if (session('position') == 'Admin' || session('position') == 'Manager'): ?>
+            <div class="card" onclick="window.location.href='/admin'">
+                <img src="<?= base_url('admin ikon.png') ?>" alt="Admin">
+                <span>Admin</span>
+            </div>
+            <?php endif; ?>
         </div>
-        <div class="card" onclick="window.location.href='/attendance'">
-            <img src="<?= base_url('Absen.png') ?>" alt="Kehadiran">
-            <span>Attendance</span>
-        </div>
-        <div class="card" onclick="window.location.href='/project'">
-            <img src="<?= base_url('Ikon Project.png') ?>" alt="Proyek">
-            <span>Project</span>
-        </div>
-        <div class="card" onclick="window.location.href='/salary/view'">
-            <img src="<?= base_url('finance.png') ?>" alt="Keuangan">
-            <span>Finance</span>
-        </div>
-        <div class="card" onclick="window.location.href='/department'">
-        <img src="<?= base_url('department ikon.png') ?>" alt="Department">
-            <span>Department</span>
-        </div>
-        <div class="card" onclick="window.location.href='/client'">
-            <img src="<?= base_url('client ikon.png') ?>" alt="Client">
-            <span>Client</span>
-        </div>
-        <?php if (session('position') == 'Admin'): ?>
-          <div class="card" onclick="window.location.href='/admin'">
-              <img src="<?= base_url('admin ikon.png') ?>" alt="Admin">
-              <span>Admin</span>
-          </div>
-        <?php endif; ?>
     </div>
 
     <footer class="footer">

@@ -143,6 +143,7 @@
                             <th>Username</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Position</th>
                             <th>Work Email</th>
                             <th>Phone Number</th>
                             <th>Actions</th>
@@ -161,6 +162,7 @@
                             <td><?= esc($employee['Username']) ?></td>
                             <td><?= esc($employee['First_Name']) ?></td>
                             <td><?= esc($employee['Last_Name']) ?></td>
+                            <td><?= esc($employee['Position']) ?></td>
                             <td><?= esc($employee['Work_Email']) ?></td>
                             <td><?= esc($employee['Phone_Number']) ?></td>
                             <td><a href="/employee/edit/<?= esc($employee['Employee_ID']) ?>" class="btn btn-warning btn-sm">Edit</a>

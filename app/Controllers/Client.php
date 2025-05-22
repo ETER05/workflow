@@ -24,10 +24,10 @@ class Client extends BaseController
             return redirect()->to('/login');
         }
 
-        if (session('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('AddClient');
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 
@@ -78,10 +78,10 @@ class Client extends BaseController
             return redirect()->to('/admin')->with('error', 'Client not found');
         }
 
-        if (session('position') !== 'Admin') {
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
-        }else{
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
             return view('EditClient', ['ClientData' => $ClientData]);
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
     }
 
