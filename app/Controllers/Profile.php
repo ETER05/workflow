@@ -13,15 +13,15 @@ class Profile extends BaseController
 
         $username = session()->get('username');
 
-        $userModel = new UserModel();
-        $userData = $userModel->where('Username', $username)->first();
+        $UserModel = new UserModel();
+        $UserData = $UserModel->where('Username', $username)->first();
 
-        if (!$userData){
+        if (!$UserData){
             return redirect()->to('/login')->with('error', 'User not found');
         }
 
         $data = [
-            'user' => $userData
+            'user' => $UserData
         ];
 
         return view('profile', $data);
@@ -57,10 +57,10 @@ class Profile extends BaseController
 
         $username = session()->get('username');
 
-        $userModel = new UserModel();
-        $userData = $userModel->where('Username', $username)->first();
+        $UserModel = new UserModel();
+        $UserData = $UserModel->where('Username', $username)->first();
 
-        if (!$userData){
+        if (!$UserData){
             return redirect()->to('/login')->with('error', 'User not found');
         }
 
@@ -71,7 +71,7 @@ class Profile extends BaseController
 
         if ($this->request->getMethod() === 'POST') {
             if ($validation->withRequest($this->request)->run()) {
-                $updatedData = [
+                $UpdatedData = [
                     'Username' => $this->request->getPost('Username'),
                     'First_Name' => $this->request->getPost('First_Name'),
                     'Last_Name' => $this->request->getPost('Last_Name'),
@@ -80,7 +80,7 @@ class Profile extends BaseController
                     'Phone_Number' => $this->request->getPost('Phone_Number'),
                 ];
 
-                $userModel->update($userData['Employee_ID'], $updatedData);
+                $UserModel->update($UserData['Employee_ID'], $UpdatedData);
 
                 return redirect()->to('/profile')->with('success', 'Profile updated successfully!');
             } else {

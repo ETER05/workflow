@@ -28,9 +28,9 @@ class Salary extends BaseController
 
         $SalaryModel = new SalaryModel();
         $salary =$SalaryModel
-                ->select('salary.*, employee.Username')
-                ->join('employee', 'employee.Employee_ID = salary.Employee_ID')
-                ->findAll();
+        ->select('salary.*, employee.Username, employee.Position')
+        ->join('employee', 'employee.Employee_ID = salary.Employee_ID')
+        ->findAll();
 
         
         if (session('position') === 'Admin' || session('position') === 'Manager') {
@@ -46,23 +46,29 @@ class Salary extends BaseController
             return redirect()->to('/login');
         }
 
-        // Ambil data pegawai langsung dari tabel employee
-        $db = \Config\Database::connect();
-        $builder = $db->table('employee');
-        $builder->select('Employee_ID, Username');
-        $employee = $builder->get()->getResultArray();
-
-        if (session('position') === 'Admin' || session('position') === 'Manager') {
-            return view('AddSalary', ['employee' => $employee]);
-        }else{
+        if (session('position') !== 'Admin' && session('position') !== 'Manager') {
             return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
+
+        $UserModel = new UserModel();
+
+        if (session('position') === 'Manager') {
+            $employee = $UserModel->where('Position', 'Employee')->findAll();
+        } else {
+            $employee = $UserModel->findAll();
+        }
+
+        return view('AddSalary', ['employee' => $employee]);
     }
 
     public function addprocess()
     {
         if (!session()->get('logged_in')) {
             return redirect()->to('/login');
+        }
+
+        if (session('position') !== 'Admin' && session('position') !== 'Manager') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
 
         $SalaryModel = new SalaryModel();
@@ -98,23 +104,25 @@ class Salary extends BaseController
             return redirect()->to('/login');
         }
 
-        // Ambil data pegawai langsung dari tabel employee
-        $db = \Config\Database::connect();
-        $builder = $db->table('employee');
-        $builder->select('Employee_ID, Username');
-        $employee = $builder->get()->getResultArray();
-
         $SalaryModel = new SalaryModel();
-        $SalaryData = $SalaryModel->find($Salary_ID);
 
-        if (!$SalaryData){
-            return redirect()->to('/admin')->with('error', 'User not found');
+        $salary = $SalaryModel
+        ->select('salary.*, employee.Position, employee.Username')
+        ->join('employee', 'employee.Employee_ID = salary.Employee_ID')
+        ->where('salary.Salary_ID', $Salary_ID)
+        ->first();
+
+        if (!$salary) {
+            return redirect()->to('/salary')->with('error', 'Salary record not found');
         }
 
-        if (session('position') === 'Admin' || session('position') === 'Manager') {
-            return view('EditSalary', ['SalaryData' => $SalaryData, 'employee' => $employee]);
+        $targetPosition = $salary['Position'];
+        $currentPosition = session()->get('position');
+
+        if (($currentPosition === 'Admin') || ($currentPosition === 'Manager' && $targetPosition === 'Employee')) {
+            return view('EditSalary', ['salary' => $salary]);
         }else{
-            return redirect()->to('/dashboard')->with('error', 'Access denied');
+            return redirect()->to('/salary')->with('error', 'Access denied');
         }
     }
 
@@ -122,6 +130,10 @@ class Salary extends BaseController
     {
         if (!session()->get('logged_in')) {
             return redirect()->to('/login');
+        }
+
+        if (session('position') !== 'Admin' && session('position') !== 'Manager') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
         }
 
         $SalaryModel = new SalaryModel();
@@ -139,7 +151,7 @@ class Salary extends BaseController
                 $salary = $SalaryModel->find($this->request->getPost('Salary_ID'));
 
                 if (!$salary) {
-                    return redirect()->to('/editsalary')->with('error', 'Salary ID not valid');
+                    return redirect()->to('/salary/edit')->with('error', 'Salary ID not valid');
                 }
 
                 $updateddata = [
@@ -164,13 +176,25 @@ class Salary extends BaseController
         }
 
         $SalaryModel = new SalaryModel();
-        $SalaryData = $SalaryModel->find($Salary_ID);
 
-        if (!$SalaryData){
-            return redirect()->to('/admin')->with('error', 'Salary not found');
+        $salary = $SalaryModel
+        ->select('salary.*, employee.Position')
+        ->join('employee', 'employee.Employee_ID = salary.Employee_ID')
+        ->where('salary.Salary_ID', $Salary_ID)
+        ->first();
+
+        if (!$salary) {
+            return redirect()->to('/salary')->with('error', 'Salary record not found');
         }
 
-        $SalaryModel->delete($SalaryData['Salary_ID']);
-        return redirect()->to('/salary')->with('success', 'Delete salary successfully!');
+        $targetPosition = $salary['Position'];
+        $currentPosition = session()->get('position');
+
+        if (($currentPosition === 'Admin') || ($currentPosition === 'Manager' && $targetPosition === 'Employee')) {
+            $SalaryModel->delete($Salary_ID);
+            return redirect()->to('/salary')->with('success', 'Delete salary successfully!');
+        } else {
+            return redirect()->to('/salary')->with('error', 'Access denied: insufficient privileges');
+        }
     }
 }

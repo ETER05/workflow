@@ -83,7 +83,7 @@
             <input type="password" name="password" placeholder="Password" required>
             <input type="submit" value="Login">
         </form>
-        <p><a href="#">Forgot Password?</a></p>
+        <p><a href="#">Our Company</a></p>
     </div>
 </body>
 </html>

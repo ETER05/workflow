@@ -135,7 +135,11 @@ class Department extends BaseController
             return redirect()->to('/admin')->with('error', 'Department not found');
         }
 
-        $DepartmentModel->delete($DepartmentData['Department_ID']);
-        return redirect()->to('/department')->with('success', 'Delete employee successfully!');
+        if (session('position') === 'Admin') {
+            $DepartmentModel->delete($DepartmentData['Department_ID']);
+            return redirect()->to('/department')->with('success', 'Delete employee successfully!');
+        } else {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }  
     }
 }

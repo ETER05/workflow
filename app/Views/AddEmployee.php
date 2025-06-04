@@ -1,223 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Add Employee</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- For ☰ icon -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+<?= $this->extend('layout/menuadmin') ?>
 
-        header {
-            background: linear-gradient(135deg, #2575fc, #5b0ab3);
-            padding: 20px;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-left img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .menu {
-            cursor: pointer;
-            font-size: 20px;
-            position: relative;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 40px;
-            background: #ffffff;
-            color: #000;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .dropdown a {
-            display: block;
-            padding: 10px 15px;
-            font-size: 14px;
-            font-weight: normal;
-            text-decoration: none;
-            color: #2d2d2d;
-        }
-
-        .dropdown a:hover {
-            background: #f0f0fa;
-        }
-
-        .container {
-            margin-top: 50px;
-        }
-
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-custom {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .dashboard {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        form label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        form input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #1e40af;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #374fc1;
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <div class="header-container">
-            <div class="header-left">
-                <img src="<?= base_url("Workflow.png") ?>" alt="WF">
-                <span>WORKFLOW</span>
-            </div>
-                <div class="menu" onclick="toggleMenu()">☰
-                    <div class="dropdown" id="menuDropdown">
-                        <a href="/dashboard">Dashboard</a>
-                        <a href="/admin">Admin</a>
-                        <a href="/department">Department</a>
-                        <a href="/overtime/approval">Overtime Request</a>
-                        <a href="/leave/approval">Leave Request</a>
-                        <a href="/project">Project</a>
-                        <a href="/client">Client</a>
-                        <a href="/salary">Finance</a>
-                        <a href="/logout">Logout</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <script>
-        function toggleMenu() {
-            const dropdown = document.getElementById('menuDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' || dropdown.style.display === '' ? 'none' : 'block';
-        }
-
-        window.onclick = function(event) {
-            const dropdown = document.getElementById('menuDropdown');
-            if (!event.target.closest('.menu') && dropdown.style.display === 'block') {
-                dropdown.style.display = 'none';
-            }
-        }
-    </script>
-
+<?php $this->setVar('title', 'Add Employee') ?>
+<?= $this->section('content') ?>
     <main>
-        <div class="dashboard">
-        <h2>Add New Employee</h2>
-        <form action="/employee/addprocess" method="POST">
-            <?= csrf_field() ?>
-            <label for="employee_id">Employee ID:</label>
-            <input type="text" id="employee_id" name="Employee_ID">
+        <div class="dashboard position-relative">
+            <a href="/admin" class="close-button" title="Kembali">&times;</a>
+            <h2>Add New Employee</h2>
+            <form action="/employee/addprocess" method="POST">
+                <?= csrf_field() ?>
+                <label for="employee_id">Employee ID:</label>
+                <input type="text" id="employee_id" name="Employee_ID">
 
-            <label for="department_id">Departement ID:</label>
-            <input type="text" id="department_id" name="Department_ID">
+                <label for="department_id">Departement ID:</label>
+                <input type="text" id="department_id" name="Department_ID">
 
-            <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="First_Name">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="First_Name">
 
-            <label for="last_name">Last Name:</label>
-            <input type="text" id="last_name" name="Last_Name">
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="Last_Name">
 
-            <label for="Position">Position</label>
-            <select id="Position" name="Position" required>
-                <option value="">-- Choose Position --</option>
-                <option value="Employee">Employee</option>
-                <option value="Manager">Manager</option>
-                <option value="Admin">Admin</option>
-            </select>
+                <label for="Position">Position</label>
+                <select id="Position" name="Position" required>
+                    <option value="">-- Choose Position --</option>
+                    <option value="Employee">Employee</option>
+                    <?php if (session()->get('position') === 'Admin'):?> 
+                        <option value="Manager">Manager</option>
+                        <option value="Admin">Admin</option>
+                    <?php endif; ?>
+                </select>
 
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="Username">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="Username">
 
-            <label for="user_password">User Password:</label>
-            <input type="text" id="user_password" name="Employee_Password">
+                <label for="user_password">User Password:</label>
+                <input type="text" id="user_password" name="Employee_Password">
 
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="Work_Email">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="Work_Email">
 
-            <label for="phone_number">Phone Number:</label>
-            <input type="text" id="phone_number" name="Phone_Number">
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="Phone_Number">
 
-            <button type="submit">Add Employee</button>
-        </form>
+                <button type="submit">Add Employee</button>
+            </form>
         </div>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?= $this->endSection() ?>

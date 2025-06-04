@@ -37,6 +37,10 @@ class Client extends BaseController
             return redirect()->to('/login');
         }
 
+        if (session('position') !== 'Admin' && session('position') !== 'Manager') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }
+
         $ClientModel = new ClientModel();
 
         $validation =  \Config\Services::validation();
@@ -91,6 +95,10 @@ class Client extends BaseController
             return redirect()->to('/login');
         }
 
+        if (session('position') !== 'Admin' && session('position') !== 'Manager') {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }
+
         $ClientModel = new ClientModel();
 
         $validation =  \Config\Services::validation();
@@ -138,7 +146,11 @@ class Client extends BaseController
             return redirect()->to('/admin')->with('error', 'Client not found');
         }
 
-        $ClientModel->delete($ClientData['Client_ID']);
-        return redirect()->to('/client')->with('success', 'Delete client successfully!');
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
+            $ClientModel->delete($ClientData['Client_ID']);
+            return redirect()->to('/client')->with('success', 'Delete client successfully!');
+        } else {
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }
     }
 }

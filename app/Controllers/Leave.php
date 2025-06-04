@@ -88,7 +88,7 @@ class Leave extends BaseController
 
         $LeaveRequestModel = new LeaveRequestModel();
         $leave = $LeaveRequestModel
-        ->select('leave_request.*, employee.Username')
+        ->select('leave_request.*, employee.Username, employee.Position')
         ->join('employee', 'employee.Employee_ID = leave_request.Employee_ID')
         ->findAll();
 
@@ -106,20 +106,62 @@ class Leave extends BaseController
         }
 
         $LeaveRequestModel = new LeaveRequestModel();
-        $LeaveRequestModel->update($Leave_ID, ['Status' => 'Approved']);
 
-        return redirect()->to('/leave/approval')->with('success', 'Overtime approved!');
+        $leave = $LeaveRequestModel
+        ->select('leave_request.*, employee.Position')
+        ->join('employee', 'employee.Employee_ID = leave_request.Employee_ID')
+        ->where('leave_request.Leave_ID', $Leave_ID)
+        ->first();
+
+        if (!$leave) {
+            return redirect()->to('/leave/approval')->with('error', 'Data not found.');
+        }
+
+        $approverPosition = session('position');
+        $requesterPosition = $leave['Position'];
+
+        if (
+            ($requesterPosition === 'Manager' && $approverPosition  !== 'Admin') ||
+            ($requesterPosition === 'Manager' && $approverPosition  !== 'Admin') ||
+            ($requesterPosition === 'Employee' && $approverPosition  === 'Employee')
+        ) {
+            return redirect()->to('/leave/approval')->with('error', 'You are not authorized to approve this request.');
+        }
+
+        $LeaveRequestModel->update($Leave_ID, ['Status' => 'Approved']);
+        return redirect()->to('/leave/approval')->with('success', 'Leave approved!');
     }
 
-    public function reject($Overtime_ID)
+    public function reject($Leave_ID)
     {
         if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
         $LeaveRequestModel = new LeaveRequestModel();
-        $LeaveRequestModel->update($Overtime_ID, ['Status' => 'Rejected']);
 
-        return redirect()->to('/leave/approval')->with('success', 'Overtime rejected!');
+        $leave = $LeaveRequestModel
+        ->select('leave_request.*, employee.Position')
+        ->join('employee', 'employee.Employee_ID = leave_request.Employee_ID')
+        ->where('leave_request.Leave_ID', $Leave_ID)
+        ->first();
+
+        if (!$leave) {
+            return redirect()->to('/overtime/approval')->with('error', 'Data not found.');
+        }
+
+        $rejecterPosition = session('position');
+        $requesterPosition = $leave['Position'];
+
+        if (
+            ($requesterPosition === 'Manager' && $rejecterPosition !== 'Admin') ||
+            ($requesterPosition === 'Manager' && $rejecterPosition !== 'Admin') ||
+            ($requesterPosition === 'Employee' && $rejecterPosition === 'Employee')
+        ) {
+            return redirect()->to('/leave/approval')->with('error', 'You are not authorized to approve this request.');
+        }
+
+        $LeaveRequestModel->update($Leave_ID, ['Status' => 'Rejected']);
+        return redirect()->to('/leave/approval')->with('success', 'Leave rejected!');
     }
 }

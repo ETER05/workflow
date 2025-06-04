@@ -164,8 +164,12 @@ class Project extends BaseController
             return redirect()->to('/admin')->with('error', 'Department not found');
         }
 
-        $Project_Model->delete($Project_Data['Project_ID']);
-        return redirect()->to('/project')->with('success', 'Delete Project successfully!');
+        if (session('position') === 'Admin' || session('position') === 'Manager') {
+            $Project_Model->delete($Project_Data['Project_ID']);
+            return redirect()->to('/project')->with('success', 'Delete Project successfully!');
+        }else{
+            return redirect()->to('/dashboard')->with('error', 'Access denied');
+        }
     }
 
     public function view($Project_ID)
