@@ -9,6 +9,7 @@
             <p><strong>Department:</strong> <?= esc($user['Department_ID']) ?></p>
             <p><strong>Position:</strong> <?= esc($user['Position']) ?></p>
             <p><strong>Username:</strong> <?= esc($user['Username']) ?></p>
+            <p><strong>Password:</strong> <?= esc($user['Employee_Password']) ?></p>
             <p><strong>Email:</strong> <?= esc($user['Work_Email']) ?></p>
             <p><strong>Phone Number:</strong> <?= esc($user['Phone_Number']) ?></p>
             <br>

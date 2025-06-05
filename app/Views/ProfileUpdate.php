@@ -21,7 +21,7 @@
                 <input type="text" id="username" name="Username" value="<?= esc($user['Username']) ?>" required>
                 <br>
 
-                <label for="user_password">User Password:</label>
+                <label for="user_password">Password:</label>
                 <input type="text" id="user_password" name="Employee_Password" value="<?= esc($user['Employee_Password']) ?>" required>
                 <br>
 
