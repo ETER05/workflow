@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuadmin') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Add Client') ?>
 <?= $this->section('content') ?>

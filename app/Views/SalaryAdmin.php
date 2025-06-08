@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuadmin') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Finance Management') ?>
 <?= $this->section('content') ?>
@@ -34,7 +34,7 @@
                                         $Permission = true;
                                     }
 
-                                    if ($currentUserPosition === 'Manager' && $requesterPosition === 'Employee') {
+                                    if ($currentUserPosition === 'Manager' && $targetPosition === 'Employee') {
                                         $Permission = true;
                                     }
                                 ?>

@@ -30,7 +30,7 @@
             display: flex;
             align-items: center;
         }
-
+        
         .header-left img {
             width: 50px;
             height: 50px;
@@ -42,6 +42,13 @@
             font-size: 20px;
             position: relative;
             transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .menu-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            position: relative;
         }
 
         .dropdown {
@@ -161,6 +168,11 @@
             color: #a71d2a;
             text-decoration: none;
         }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 </head>
 <body>
@@ -170,9 +182,11 @@
                 <img src="<?= base_url('Workflow.png')?>" alt="WF">
                 <span>WORKFLOW</span>
             </div>
-                <div class="menu" onclick="toggleMenu()">☰
-                    <div class="dropdown" id="menuDropdown">
-                        <a href="/dashboard">Dashboard</a>
+            <div class="menu-wrapper">
+                <!-- Admin Menu -->
+                <?php if (session('position') === 'Admin' || session('position') === 'Manager'): ?>
+                <div class="menu" onclick="toggleAdminMenu()">🛠️
+                    <div class="dropdown" id="adminMenuDropdown">
                         <a href="/admin">Admin</a>
                         <a href="/department">Department</a>
                         <a href="/overtime/approval">Overtime Request</a>
@@ -181,25 +195,55 @@
                         <a href="/client">Client</a>
                         <a href="/salary">Finance</a>
                         <a href="/logout">Logout</a>
+                    </div>
                 </div>
-            </div>
+                <?php endif; ?>
+
+                <!-- User Menu -->
+                <div class="menu" onclick="toggleUserMenu()">☰
+                    <div class="dropdown" id="userMenuDropdown">
+                        <a href="/dashboard">Dashboard</a>
+                        <a href="/profile">Profile</a>
+                        <a href="/attendance">Attendance</a>
+                        <a href="/project">Project</a>
+                        <a href="/client">Client Info</a>
+                       <a href="/salary/view">Finance</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div> 
         </div>
     </header>
 
-    <script>
-    function toggleMenu() {
-        const dropdown = document.getElementById("menuDropdown");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    }
 
-    document.addEventListener("click", function(event) {
-        const menu = document.querySelector(".menu");
-        const dropdown = document.getElementById("menuDropdown");
-        if (!menu.contains(event.target)) {
-        dropdown.style.display = "none";
+    <script>
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById("userMenuDropdown");
+            const adminDropdown = document.getElementById("adminMenuDropdown");
+            userDropdown.style.display = userDropdown.style.display === "block" ? "none" : "block";
+            adminDropdown.style.display = "none";
         }
-    });
+
+        function toggleAdminMenu() {
+            const adminDropdown = document.getElementById("adminMenuDropdown");
+            const userDropdown = document.getElementById("userMenuDropdown");
+            adminDropdown.style.display = adminDropdown.style.display === "block" ? "none" : "block";
+            userDropdown.style.display = "none";
+        }
+
+        // Close dropdowns if clicked outside
+        document.addEventListener("click", function(event) {
+            const userMenu = document.getElementById("userMenuDropdown");
+            const adminMenu = document.getElementById("adminMenuDropdown");
+            const menus = document.querySelectorAll(".menu");
+
+            if (![...menus].some(menu => menu.contains(event.target))) {
+                if (userMenu) userMenu.style.display = "none";
+                if (adminMenu) adminMenu.style.display = "none";
+            }
+        });
     </script>
+
    
     <div class="container">
         <?= $this->renderSection('content') ?>

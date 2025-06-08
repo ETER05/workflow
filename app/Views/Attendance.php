@@ -1,23 +1,23 @@
-<?= $this->extend('layout/menuuser') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Attendace') ?>
 <?= $this->section('content') ?>
     <div class="container">
         <div class="text-center mb-4">
-            <a href="/overtime" class="btn1">Overtime</a>
-            <a href="/leave" class="btn1">Leave</a>
+            <a href="/overtime" class="btn btn-primary">Overtime</a>
+            <a href="/leave" class="btn btn-primary">Leave</a>
         </div>
 
         <?php if (!$check): ?>
             <form method="post" action="/attendance/checkin">
                 <div class="text-center">
-                    <button type="submit" class="btn1">Check In</button>
+                    <button type="submit" class="btn btn-primary">Check In</button>
                 </div>
             </form>
         <?php else: ?>
             <form method="post" action="/attendance/checkout">
                 <div class="text-center">
-                    <button type="submit" class="btn1">Check Out</button>
+                    <button type="submit" class="btn btn-primary">Check Out</button>
                 </div>
             </form>
         <?php endif; ?>

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuadmin') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Edit Project') ?>
 <?= $this->section('content') ?> 
@@ -6,7 +6,7 @@
         <div class="dashboard position-relative">
             <a href="/project" class="close-button" title="Kembali">&times;</a>
             <h2>Edit Project</h2>
-            <form action="/project/addprocess" method="POST">
+            <form action="/project/editprocess" method="POST">
                 <?= csrf_field() ?>
                 <label for="project_name">Project Name:</label>
                 <input type="text" id="project_name" name="Project_Name" value='<?= esc($ProjectData['Project_Name'])?>'>

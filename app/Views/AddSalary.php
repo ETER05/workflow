@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuadmin') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Edit Salary') ?>
 <?= $this->section('content') ?>

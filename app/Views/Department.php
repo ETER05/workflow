@@ -1,8 +1,4 @@
-<?php if (session()->getFlashdata('success')): ?>
-    <?= $this->extend('layout/menuadmin') ?>
-<?php else: ?>
-    <?= $this->extend('layout/menuuser') ?>
-<?php endif; ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Department') ?>
 <?= $this->section('content') ?>

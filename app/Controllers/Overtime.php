@@ -154,7 +154,7 @@ class Overtime extends BaseController
         $requesterPosition = $overtime['Position'];
 
         if (
-            ($requesterPosition === 'Manager' && $rejecterPosition !== 'Admin') ||
+            ($requesterPosition === 'Admin' && $rejecterPosition !== 'Admin') ||
             ($requesterPosition === 'Manager' && $rejecterPosition !== 'Admin') ||
             ($requesterPosition === 'Employee' && $rejecterPosition === 'Employee')
         ) {

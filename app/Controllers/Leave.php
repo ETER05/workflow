@@ -121,7 +121,7 @@ class Leave extends BaseController
         $requesterPosition = $leave['Position'];
 
         if (
-            ($requesterPosition === 'Manager' && $approverPosition  !== 'Admin') ||
+            ($requesterPosition === 'Admin' && $approverPosition  !== 'Admin') ||
             ($requesterPosition === 'Manager' && $approverPosition  !== 'Admin') ||
             ($requesterPosition === 'Employee' && $approverPosition  === 'Employee')
         ) {
@@ -154,7 +154,7 @@ class Leave extends BaseController
         $requesterPosition = $leave['Position'];
 
         if (
-            ($requesterPosition === 'Manager' && $rejecterPosition !== 'Admin') ||
+            ($requesterPosition === 'Admin' && $rejecterPosition !== 'Admin') ||
             ($requesterPosition === 'Manager' && $rejecterPosition !== 'Admin') ||
             ($requesterPosition === 'Employee' && $rejecterPosition === 'Employee')
         ) {

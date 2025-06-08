@@ -161,7 +161,7 @@ class Project extends BaseController
         $Project_Data = $Project_Model->find($Project_ID);
 
         if (!$Project_Data){
-            return redirect()->to('/admin')->with('error', 'Department not found');
+            return redirect()->to('/admin')->with('error', 'Project not found');
         }
 
         if (session('position') === 'Admin' || session('position') === 'Manager') {

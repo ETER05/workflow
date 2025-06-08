@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuuser') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Update Profile') ?>
 <?= $this->section('content') ?>

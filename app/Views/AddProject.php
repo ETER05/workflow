@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuadmin') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Add Project') ?>
 <?= $this->section('content') ?>
@@ -21,7 +21,7 @@
                 <br>
 
                 <label for="manager_id">Manager:</label>
-                <select id="manager_id" name="Manager_ID"  required>
+                <select id="manager_id" name="Manager_ID" >
                 <option value=""></option>
                     <?php foreach ($manager as $manager): ?>
                         <option value="<?= $manager['Manager_ID'] ?>">
@@ -32,7 +32,7 @@
                 <br>
 
                 <label for="client_name">Client:</label>
-                <select id="client_id" name="Client_ID" required>
+                <select id="client_id" name="Client_ID">
                     <option value=""></option>
                     <?php foreach ($client as $client): ?>
                         <option value="<?= $client['Client_ID'] ?>">

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/menuuser') ?>
+<?= $this->extend('layout/menu') ?>
 
 <?php $this->setVar('title', 'Overtime Request') ?>
 <?= $this->section('content') ?>
