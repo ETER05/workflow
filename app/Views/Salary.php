@@ -9,22 +9,26 @@
                 <h4>Finance List</h4>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Salary Date</th>
-                            <th>Salary Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($salary as $salary): ?>
-                        <tr>
-                            <td><?= esc($salary['Salary_Date']) ?></td>
-                            <td><?= esc($salary['Salary_Amount']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Salary Date</th>
+                                <th>Salary Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($salary as $salary): ?>
+                            <tr>
+                                <td><?= esc($salary['Salary_Type']) ?></td>
+                                <td><?= esc($salary['Salary_Date']) ?></td>
+                                <td><?= esc($salary['Salary_Amount']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

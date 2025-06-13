@@ -7,5 +7,5 @@ class SalaryModel extends Model
 {
     protected $table = 'salary';
     protected $primaryKey = 'Salary_ID';
-    protected $allowedFields = ['Salary_ID', 'Salary_Date', 'Salary_Amount', 'Employee_ID'];
+    protected $allowedFields = ['Salary_ID', 'Salary_Type', 'Salary_Date', 'Salary_Amount', 'Employee_ID'];
 }

@@ -13,7 +13,7 @@
             <p><strong>Email:</strong> <?= esc($user['Work_Email']) ?></p>
             <p><strong>Phone Number:</strong> <?= esc($user['Phone_Number']) ?></p>
             <br>
-            <a href="/profile/update" class="btn1">Update</a>
+            <a href="/profile/update" class="btn btn-primary">Update</a>
         </div>
     </main>
 <?= $this->endSection() ?>

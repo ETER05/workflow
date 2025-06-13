@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 use App\Models\ProjectModel;
+use App\Models\Employee_ProjectModel;
+use App\Models\OvertimeModel;
+use App\Models\OvertimeProjectModel;
 
 class Project extends BaseController
 {
@@ -179,26 +182,36 @@ class Project extends BaseController
         }
 
         $ProjectModel = new ProjectModel();
+        $OvertimeModel = new OvertimeModel();
 
         $project = $ProjectModel
-            ->select('project.*, client.Client_Name, employee.Username as Manager_Name')
-            ->join('client', 'client.Client_ID = project.Client_ID', 'left')
-            ->join('manager', 'manager.Manager_ID = project.Manager_ID', 'left')
-            ->join('employee', 'employee.Employee_ID = manager.Employee_ID', 'left')
-            ->where('project.Project_ID', $Project_ID)
-            ->first();
+        ->select('project.*, client.Client_Name, employee.Username as Manager_Name')
+        ->join('client', 'client.Client_ID = project.Client_ID', 'left')
+        ->join('manager', 'manager.Manager_ID = project.Manager_ID', 'left')
+        ->join('employee', 'employee.Employee_ID = manager.Employee_ID', 'left')
+        ->where('project.Project_ID', $Project_ID)
+        ->first();
 
         if (!$project) {
             return redirect()->to('/project')->with('error', 'Project not found');
         }
 
         // Ambil dokumen dari database
-        $EmployeeProjectModel = new \App\Models\Employee_ProjectModel();
+        $EmployeeProjectModel = new Employee_ProjectModel();
         $documents = $EmployeeProjectModel
-            ->where('Project_ID', $Project_ID)
-            ->findAll();
+        ->select('employee_project.*, employee.Username')
+        ->join('employee', 'employee.Employee_ID = employee_project.Employee_ID')
+        ->where('Project_ID', $Project_ID)
+        ->findAll();
 
-        return view('ProjectView', ['project' => $project, 'documents' => $documents]);
+        $OvertimeProjectModel = new OvertimeProjectModel();
+        $overtimedocuments = $OvertimeProjectModel
+        ->select('overtime_project.*, employee.Username')
+        ->join('employee', 'employee.Employee_ID = overtime_project.Employee_ID')
+        ->where('Project_ID', $Project_ID)
+        ->findAll();
+
+        return view('ProjectView', ['project' => $project, 'documents' => $documents,'overtimedocuments' => $overtimedocuments]);
     }
 
 

@@ -128,8 +128,12 @@ class Leave extends BaseController
             return redirect()->to('/leave/approval')->with('error', 'You are not authorized to approve this request.');
         }
 
-        $LeaveRequestModel->update($Leave_ID, ['Status' => 'Approved']);
-        return redirect()->to('/leave/approval')->with('success', 'Leave approved!');
+        if ($leave['Status'] === 'Requesting') {
+            $LeaveRequestModel->update($Leave_ID, ['Status' => 'Approved']);
+            return redirect()->to('/leave/approval')->with('success', 'Leave approved!');
+        } else {
+            return redirect()->to('/leave/approval')->with('error', 'Leave request is not in Requesting status.');
+        }
     }
 
     public function reject($Leave_ID)
@@ -161,7 +165,11 @@ class Leave extends BaseController
             return redirect()->to('/leave/approval')->with('error', 'You are not authorized to approve this request.');
         }
 
-        $LeaveRequestModel->update($Leave_ID, ['Status' => 'Rejected']);
-        return redirect()->to('/leave/approval')->with('success', 'Leave rejected!');
+        if ($leave['Status'] === 'Requesting') {
+            $LeaveRequestModel->update($Leave_ID, ['Status' => 'Rejected']);
+            return redirect()->to('/leave/approval')->with('success', 'Leave rejected!');
+        } else {
+            return redirect()->to('/leave/approval')->with('error', 'Leave request is not in Requesting status.');
+        }
     }
 }

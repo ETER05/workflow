@@ -51,6 +51,11 @@ $routes->get('/overtime/delete/(:segment)', 'Overtime::delete/$1');
 $routes->get('/overtime/approval', 'Overtime::approval');
 $routes->get('/overtime/approve/(:segment)', 'Overtime::approve/$1');
 $routes->get('/overtime/reject/(:segment)', 'Overtime::reject/$1');
+$routes->get('/overtime/view/(:segment)', 'Overtime::view/$1');
+$routes->post('/overtime/upload/(:num)', 'Overtime::upload/$1');
+$routes->get('/overtime/download/(:num)/(:any)', 'Overtime::download/$1/$2');
+$routes->get('/overtime/deletefile/(:num)/(:num)', 'Overtime::deletefile/$1/$2');
+$routes->get('/overtime/finalize/(:segment)', 'Overtime::finalize/$1');
 //leave
 $routes->get('/leave', 'Leave::index');
 $routes->get('/leave/add', 'Leave::add');

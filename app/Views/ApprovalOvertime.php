@@ -10,53 +10,59 @@
                 <h4>Overtime List</h4>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Employee Name</th>
-                            <th>Overtime Date</th>
-                            <th>Overtime Start</th>
-                            <th>Overtime End</th>
-                            <th>Status</th>
-                            <th>Reason</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($overtime as $overtime): ?>
-                        <tr>
-                            <td><?= esc($overtime['Username']) ?></td>
-                            <td><?= esc($overtime['Overtime_Date']) ?></td>
-                            <td><?= esc($overtime['Overtime_Start']) ?></td>
-                            <td><?= esc($overtime['Overtime_End']) ?></td>
-                            <td><?= esc($overtime['Status']) ?></td>
-                            <td><?= esc($overtime['Reason']) ?></td>
-                            <td>
-                                <?php
-                                    $currentUserPosition = session('position');
-                                    $requesterPosition = $overtime['Position'];
-                                    $canApprove = false;
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Overtime Date</th>
+                                <th>Overtime Start</th>
+                                <th>Overtime End</th>
+                                <th>Status</th>
+                                <th>Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($overtime as $overtime): ?>
+                            <tr>
+                                <td><?= esc($overtime['Username']) ?></td>
+                                <td><?= esc($overtime['Overtime_Date']) ?></td>
+                                <td><?= esc($overtime['Overtime_Start']) ?></td>
+                                <td><?= esc($overtime['Overtime_End']) ?></td>
+                                <td><?= esc($overtime['Status']) ?></td>
+                                <td><?= esc($overtime['Reason']) ?></td>
+                                <td>
+                                    <?php if ($overtime['Status'] === 'Requesting'): ?>
+                                        <?php
+                                            $currentUserPosition = session('position');
+                                            $requesterPosition = $overtime['Position'];
+                                            $canApprove = false;
 
-                                    if ($currentUserPosition === 'Admin') {
-                                        $canApprove = true;
-                                    }
+                                            if ($currentUserPosition === 'Admin') {
+                                                $canApprove = true;
+                                            }
 
-                                    if ($currentUserPosition === 'Manager' && $requesterPosition === 'Employee') {
-                                        $canApprove = true;
-                                    }
-                                ?>
+                                            if ($currentUserPosition === 'Manager' && $requesterPosition === 'Employee') {
+                                                $canApprove = true;
+                                            }
+                                        ?>
 
-                                <?php if ($canApprove): ?>
-                                    <a href="/overtime/approve/<?= esc($overtime['Overtime_ID']) ?>" class="btn btn-success btn-sm">Approve</a>
-                                    <a href="/overtime/reject/<?= esc($overtime['Overtime_ID']) ?>" class="btn btn-danger btn-sm">Reject</a>
-                                <?php else: ?>
-                                    <span class="text-muted">No action</span>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                                        <?php if ($canApprove): ?>
+                                            <a href="/overtime/approve/<?= esc($overtime['Overtime_ID']) ?>" class="btn btn-success btn-sm">Approve</a>
+                                            <a href="/overtime/reject/<?= esc($overtime['Overtime_ID']) ?>" class="btn btn-danger btn-sm">Reject</a>
+                                        <?php else: ?>
+                                            <span class="text-muted">No action</span>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        No Action
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

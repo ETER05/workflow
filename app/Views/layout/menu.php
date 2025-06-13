@@ -206,8 +206,9 @@
                         <a href="/profile">Profile</a>
                         <a href="/attendance">Attendance</a>
                         <a href="/project">Project</a>
+                        <a href="/salary/view">Finance</a>
+                        <a href="/department">Departmentt</a>
                         <a href="/client">Client Info</a>
-                       <a href="/salary/view">Finance</a>
                         <a href="/logout">Logout</a>
                     </div>
                 </div>

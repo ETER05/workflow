@@ -84,6 +84,7 @@ class Salary extends BaseController
             if ($validation->withRequest($this->request)->run()) {
 
                 $insertData = [
+                    'Salary_Type' => 'Salary',
                     'Salary_Date' => $this->request->getPost('Salary_Date'),
                     'Salary_Amount' => $this->request->getPost('Salary_Amount'),
                     'Employee_ID' => $this->request->getPost('Employee_ID'),

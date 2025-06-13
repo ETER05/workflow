@@ -28,24 +28,26 @@
                 <h4>Attendance List</h4>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                        <th>Date</th>
-                        <th>Check In</th>
-                        <th>Check Out</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($attendance as $attendance): ?>
-                        <tr>
-                            <td><?= esc($attendance['Attendance_Date']) ?></td>
-                            <td><?= esc($attendance['In_Time']) ?></td>
-                            <td><?= esc($attendance['Out_Time']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th>Date</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($attendance as $attendance): ?>
+                            <tr>
+                                <td><?= esc($attendance['Attendance_Date']) ?></td>
+                                <td><?= esc($attendance['In_Time']) ?></td>
+                                <td><?= esc($attendance['Out_Time']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
