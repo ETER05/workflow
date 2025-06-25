@@ -32,7 +32,7 @@
                             <td><?= esc($leave['Status']) ?></td>
                             <td><?= esc($leave['Reason']) ?></td>
                             <td>
-                                <?php if ($overtime['Status'] === 'Requesting'): ?>
+                                <?php if ($leave['Status'] === 'Requesting'): ?>
                                     <?php
                                         $currentUserPosition = session('position');
                                         $requesterPosition = $leave['Position'];
